@@ -1,0 +1,33 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Legal Guardian AI">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A1F3F"/>
+      <stop offset="1" stop-color="#122C54"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#4CC9F0" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#4CC9F0" stop-opacity="1"/>
+      <stop offset="1" stop-color="#4CC9F0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <g opacity="0.18" stroke="#8DD6FF">
+    <path d="M40 100H1160"/>
+    <path d="M40 200H1160"/>
+    <path d="M40 300H1160"/>
+    <path d="M40 400H1160"/>
+    <path d="M40 500H1160"/>
+    <path d="M40 600H1160"/>
+  </g>
+  <g transform="translate(250,135)">
+    <rect x="120" y="70" width="460" height="360" rx="28" fill="#07162F" stroke="#72D5FF" stroke-opacity="0.7"/>
+    <rect x="160" y="110" width="380" height="280" rx="20" fill="#0F2448"/>
+    <path d="M350 152L460 202V278C460 332 418 381 350 404C282 381 240 332 240 278V202L350 152Z" fill="#57C7FF" fill-opacity="0.2" stroke="#93E2FF" stroke-width="4"/>
+    <path d="M320 276L343 300L390 250" fill="none" stroke="#C5F2FF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="220" y="335" width="260" height="16" rx="8" fill="url(#glow)"/>
+    <circle cx="214" cy="343" r="5" fill="#9BE7FF"/>
+    <circle cx="486" cy="343" r="5" fill="#9BE7FF"/>
+  </g>
+  <text x="80" y="90" fill="#B8E9FF" font-size="34" font-family="Segoe UI, Arial, sans-serif" letter-spacing="3">LEGAL GUARDIAN AI</text>
+  <text x="80" y="640" fill="#8FCDE9" font-size="22" font-family="Segoe UI, Arial, sans-serif" letter-spacing="2">Contract Intelligence | Clause Risk Analysis | AI-Assisted Review</text>
+</svg>

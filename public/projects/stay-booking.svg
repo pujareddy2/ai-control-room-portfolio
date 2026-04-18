@@ -1,0 +1,20 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stay Booking App">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#123A54"/>
+      <stop offset="1" stop-color="#205A74"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <g transform="translate(240,120)">
+    <rect x="80" y="45" width="640" height="450" rx="28" fill="#0F2A3D" stroke="#94D8FF" stroke-opacity="0.55"/>
+    <rect x="125" y="90" width="550" height="240" rx="18" fill="#1B4561"/>
+    <path d="M170 290L275 180L345 245L430 165L545 290" fill="none" stroke="#D0EEFF" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="570" cy="145" r="20" fill="#CCECFF"/>
+    <rect x="125" y="350" width="550" height="110" rx="16" fill="#14354B"/>
+    <rect x="155" y="380" width="260" height="50" rx="10" fill="#2A6C8E"/>
+    <text x="208" y="412" fill="#E9FAFF" font-size="24" font-family="Segoe UI, Arial, sans-serif">Book Now</text>
+  </g>
+  <text x="80" y="90" fill="#D1F1FF" font-size="34" font-family="Segoe UI, Arial, sans-serif" letter-spacing="3">AI-DRIVEN STAY BOOKING</text>
+  <text x="80" y="640" fill="#9ECFE6" font-size="22" font-family="Segoe UI, Arial, sans-serif" letter-spacing="2">Listing Discovery | Booking Flow | Rapid AI-Generated Full Stack</text>
+</svg>

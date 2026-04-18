@@ -1,0 +1,5 @@
+Put your ambient audio file here as `ambient.mp3`.
+
+Recommended:
+- very soft night ambience / lo-fi
+- target volume in code: 20% (see `components/ui/useAmbientAudio.ts`)

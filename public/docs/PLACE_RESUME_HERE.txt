@@ -1,0 +1,6 @@
+Copy your resume PDF into this folder so it’s publicly downloadable.
+
+Recommended path:
+- `public/docs/Midde_Puja_Resume.pdf`
+
+Then link to it from the ABOUT module.

@@ -1,0 +1,20 @@
+<svg width="1200" height="700" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Smart Attendance">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1E1E3A"/>
+      <stop offset="1" stop-color="#28365F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="700" fill="url(#bg)"/>
+  <g transform="translate(210,140)">
+    <rect x="100" y="40" width="580" height="380" rx="24" fill="#101A31" stroke="#A5BFFF" stroke-opacity="0.6"/>
+    <rect x="140" y="84" width="500" height="292" rx="18" fill="#1D2A4E"/>
+    <circle cx="390" cy="170" r="58" fill="none" stroke="#C6D6FF" stroke-width="6"/>
+    <path d="M350 248C364 222 385 210 390 210C395 210 416 222 430 248" fill="none" stroke="#C6D6FF" stroke-width="6" stroke-linecap="round"/>
+    <rect x="240" y="282" width="300" height="52" rx="12" fill="#18294B" stroke="#98B6FF" stroke-opacity="0.55"/>
+    <path d="M272 309L290 327L328 289" fill="none" stroke="#AEE3FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="350" y="319" fill="#D7E7FF" font-size="26" font-family="Segoe UI, Arial, sans-serif">PRESENT</text>
+  </g>
+  <text x="80" y="90" fill="#D4DEFF" font-size="34" font-family="Segoe UI, Arial, sans-serif" letter-spacing="3">SMART ATTENDANCE SYSTEM</text>
+  <text x="80" y="640" fill="#A7BCE8" font-size="22" font-family="Segoe UI, Arial, sans-serif" letter-spacing="2">CNN Face Recognition | Real-Time Tracking | Firebase Sync</text>
+</svg>
