@@ -27,6 +27,8 @@ export default function Projects() {
           {PROJECTS.map((project, idx) => {
             const isReverse = idx % 2 === 1;
             const imageSrc = project.image ?? "/projects/producthub.svg";
+            const imageSpan = idx % 3 === 0 ? "lg:col-span-6" : "lg:col-span-5";
+            const textSpan = idx % 3 === 0 ? "lg:col-span-4" : "lg:col-span-5";
             return (
               <motion.article
                 key={project.title}
@@ -35,55 +37,59 @@ export default function Projects() {
                 transition={{ duration: 0.6, delay: idx * 0.05 }}
                 viewport={{ once: true, amount: 0.2 }}
                 onClick={() => setSelectedIndex(idx)}
-                className="group cursor-pointer rounded-2xl border-2 border-white/45 bg-gradient-to-br from-slate-950/92 via-black to-slate-950/92 p-4 shadow-[0_0_0_1px_rgba(255,255,255,0.28),0_28px_82px_rgba(0,0,0,0.76),0_0_50px_rgba(148,163,184,0.16)] md:p-5"
+                className="group cursor-pointer rounded-2xl border border-white/22 bg-gradient-to-br from-slate-950/95 via-black to-slate-950/90 p-4 shadow-[0_1px_0_rgba(255,255,255,0.08)_inset,0_18px_40px_rgba(0,0,0,0.56),10px_16px_0_rgba(2,6,23,0.34)] md:p-5"
               >
-                <div className="grid gap-4 lg:grid-cols-2 lg:gap-5">
+                <div className="grid gap-4 lg:grid-cols-10 lg:gap-5">
                   <div
-                    className={`relative min-h-[280px] overflow-hidden rounded-xl border border-white/20 bg-black/40 lg:min-h-[360px] ${
+                    className={`relative min-h-[280px] overflow-hidden rounded-xl bg-black/35 lg:min-h-[360px] ${imageSpan} ${
                       isReverse ? "lg:order-2" : "lg:order-1"
                     }`}
                   >
                     <button
                       type="button"
                       onClick={() => setSelectedIndex(idx)}
-                      className="relative h-full w-full"
+                      className="relative h-full w-full p-3"
                       aria-label={`Open details for ${project.title}`}
                     >
-                      <Image
-                        src={imageSrc}
-                        alt={project.title}
-                        fill
-                        priority={idx < 2}
-                        sizes="(max-width: 1024px) 100vw, 50vw"
-                        className="object-cover grayscale-[0.05] transition duration-500 group-hover:scale-[1.035]"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                      <div className="absolute bottom-4 left-4 right-4 rounded-lg border border-white/20 bg-black/52 px-4 py-3 text-left backdrop-blur-sm">
-                        <div className="font-heading text-xl tracking-wide text-white">{project.title}</div>
-                        <div className="mt-1 text-xs font-mono tracking-[0.16em] text-gray-300/80">{project.subtitle}</div>
+                      <div className="relative h-full w-full rounded-lg border border-white/15 bg-slate-900/55">
+                        <Image
+                          src={imageSrc}
+                          alt={project.title}
+                          fill
+                          priority={idx < 2}
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-contain p-2 transition duration-500 group-hover:scale-[1.01]"
+                        />
                       </div>
                     </button>
                   </div>
 
                   <div
                     onClick={() => setSelectedIndex(idx)}
-                    className={`flex flex-col justify-center rounded-xl border border-white/20 bg-black/35 p-6 md:p-8 lg:p-9 ${
+                    className={`flex flex-col justify-center rounded-xl bg-slate-950/28 p-6 md:p-8 lg:p-9 ${textSpan} ${
                       isReverse ? "lg:order-1" : "lg:order-2"
                     }`}
                   >
-                    <p className="text-base leading-relaxed text-gray-300 md:text-[1.03rem]">
+                    <h3 className="font-heading text-2xl tracking-tight text-white">{project.title}</h3>
+                    <p className="mt-2 text-sm font-mono tracking-[0.12em] text-sky-100/75">{project.subtitle}</p>
+
+                    <div className="my-5 h-px w-full bg-gradient-to-r from-white/20 via-white/10 to-transparent" />
+
+                    <p className="text-[1.03rem] leading-relaxed text-gray-200">
                       {project.summary}
                     </p>
 
-                    <p className="mt-4 text-sm leading-relaxed text-gray-400">
+                    <p className="mt-4 text-sm leading-relaxed text-gray-400/90">
                       {project.paragraphs[0]}
                     </p>
+
+                    <div className="my-5 h-px w-full bg-gradient-to-r from-white/16 via-white/8 to-transparent" />
 
                     <div className="mt-6 flex flex-wrap gap-2.5">
                       {project.stack.slice(0, 7).map((tech) => (
                         <span
                           key={tech}
-                          className="rounded-md border border-white/20 bg-white/[0.07] px-3 py-1 text-xs font-mono text-gray-100"
+                          className="rounded-md border border-white/16 bg-white/[0.04] px-3 py-1 text-xs font-mono text-gray-200/95"
                         >
                           {tech}
                         </span>
@@ -98,7 +104,7 @@ export default function Projects() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(event) => event.stopPropagation()}
-                            className="inline-flex items-center gap-2 rounded-lg border border-sky-100/40 bg-sky-100/10 px-4 py-2.5 font-mono text-sm text-sky-50 shadow-[0_0_18px_rgba(186,230,253,0.14)] transition hover:-translate-y-0.5 hover:bg-sky-100/18"
+                            className="inline-flex items-center gap-2 rounded-lg border border-sky-100/30 bg-sky-100/8 px-4 py-2.5 font-mono text-sm text-sky-50 shadow-[0_0_12px_rgba(186,230,253,0.1)] transition hover:-translate-y-0.5 hover:bg-sky-100/16"
                           >
                             <ExternalLink className="h-4 w-4" />
                             Live Link
@@ -111,7 +117,7 @@ export default function Projects() {
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={(event) => event.stopPropagation()}
-                            className="inline-flex items-center gap-2 rounded-lg border border-white/30 bg-white/8 px-4 py-2.5 font-mono text-sm text-gray-100 shadow-[0_0_16px_rgba(203,213,225,0.12)] transition hover:-translate-y-0.5 hover:bg-white/15"
+                            className="inline-flex items-center gap-2 rounded-lg border border-white/24 bg-white/6 px-4 py-2.5 font-mono text-sm text-gray-100 shadow-[0_0_12px_rgba(203,213,225,0.08)] transition hover:-translate-y-0.5 hover:bg-white/13"
                           >
                             <GitHub className="h-4 w-4" />
                             GitHub Link
@@ -146,14 +152,16 @@ export default function Projects() {
               className="max-h-[88vh] w-full max-w-5xl overflow-auto rounded-2xl border border-white/15 bg-gradient-to-b from-gray-950 to-black p-5 shadow-[0_30px_100px_rgba(0,0,0,0.75)] md:p-8"
             >
               <div className="grid gap-6 lg:grid-cols-2">
-                <div className="relative min-h-[280px] overflow-hidden rounded-xl border border-white/10">
-                  <Image
-                    src={selectedProject.image ?? "/projects/producthub.svg"}
-                    alt={selectedProject.title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover"
-                  />
+                <div className="relative min-h-[280px] overflow-hidden rounded-xl border border-white/10 bg-slate-900/55 p-3">
+                  <div className="relative h-full w-full rounded-lg border border-white/10 bg-black/35">
+                    <Image
+                      src={selectedProject.image ?? "/projects/producthub.svg"}
+                      alt={selectedProject.title}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-contain p-2"
+                    />
+                  </div>
                 </div>
 
                 <div>
