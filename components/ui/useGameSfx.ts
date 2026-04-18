@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useRef } from "react";
+import type { ModuleId } from "../../lib/portfolio";
 
 export default function useGameSfx() {
   const ctxRef = useRef<AudioContext | null>(null);
+  const lastHoverAtRef = useRef(0);
 
   const ensureContext = useCallback(async () => {
     const AudioCtx = window.AudioContext || (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
@@ -92,5 +94,44 @@ export default function useGameSfx() {
     }, 48);
   }, [playTone]);
 
-  return { playClick, playOpen, playClose, playBoot, playAssistant };
+  const playHover = useCallback(async () => {
+    const now = performance.now();
+    if (now - lastHoverAtRef.current < 120) return;
+    lastHoverAtRef.current = now;
+
+    await playTone(698.46, 0.05, 0.015, "sine");
+  }, [playTone]);
+
+  const playModuleHit = useCallback(async () => {
+    await playChord([261.63, 329.63, 392], 0.09, 0.034, "triangle");
+    setTimeout(() => {
+      void playTone(783.99, 0.07, 0.022, "sine");
+    }, 64);
+  }, [playChord, playTone]);
+
+  const playModuleTheme = useCallback(async (id: ModuleId) => {
+    const sequences: Record<ModuleId, { chord: number[]; accent: number }> = {
+      about: { chord: [261.63, 329.63, 392], accent: 523.25 },
+      projects: { chord: [293.66, 369.99, 440], accent: 659.25 },
+      skills: { chord: [329.63, 415.3, 493.88], accent: 739.99 },
+      experience: { chord: [246.94, 311.13, 392], accent: 587.33 },
+      certifications: { chord: [277.18, 349.23, 415.3], accent: 622.25 },
+      contact: { chord: [220, 277.18, 329.63], accent: 493.88 },
+    };
+
+    const selected = sequences[id];
+    await playChord(selected.chord, 0.12, 0.03, "triangle");
+    setTimeout(() => {
+      void playTone(selected.accent, 0.1, 0.024, "sine");
+    }, 68);
+  }, [playChord, playTone]);
+
+  const playLockSwell = useCallback(async () => {
+    await playChord([110, 138.59, 164.81], 0.22, 0.042, "sine");
+    setTimeout(() => {
+      void playTone(82.41, 0.28, 0.03, "triangle");
+    }, 60);
+  }, [playChord, playTone]);
+
+  return { playClick, playOpen, playClose, playBoot, playAssistant, playHover, playModuleHit, playModuleTheme, playLockSwell };
 }

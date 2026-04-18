@@ -1,5 +1,13 @@
-Put your ambient audio file here as `ambient.mp3`.
+Put your ambient audio file here as night-sky-soft.mp3.
 
-Recommended:
-- very soft night ambience / lo-fi
-- target volume in code: 20% (see `components/ui/useAmbientAudio.ts`)
+Recommended style:
+- soft night ambience, atmospheric, non-vocal
+- BPM around 55-80, gentle pads, no heavy percussion
+
+Suggested royalty-free starting points (researched):
+- Mixkit Ambient: Rest Now, Smooth Meditation, Voxscape
+- Pixabay Ambient: Space Ambient, Ambient Soft, Ambient Atmosphere
+
+Current app behavior:
+- code first tries /audio/night-sky-soft.mp3
+- if missing or blocked, it falls back to a built-in synthesized night pad

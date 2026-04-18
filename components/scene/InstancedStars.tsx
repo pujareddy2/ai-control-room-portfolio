@@ -8,9 +8,24 @@ import type { InstancedMesh, MeshBasicMaterial } from "three";
 type Props = {
   count?: number;
   radius?: number;
+  minSize?: number;
+  maxSize?: number;
+  opacityBase?: number;
+  opacityPulse?: number;
+  rotationSpeed?: number;
+  depthJitter?: number;
 };
 
-export default function InstancedStars({ count = 900, radius = 240 }: Props) {
+export default function InstancedStars({
+  count = 900,
+  radius = 240,
+  minSize = 0.02,
+  maxSize = 0.055,
+  opacityBase = 0.3,
+  opacityPulse = 0.05,
+  rotationSpeed = 0.008,
+  depthJitter = 35,
+}: Props) {
   const meshRef = useRef<InstancedMesh | null>(null);
 
   useLayoutEffect(() => {
@@ -41,13 +56,13 @@ export default function InstancedStars({ count = 900, radius = 240 }: Props) {
       const theta = 2 * Math.PI * u;
       const phi = Math.acos(2 * v - 1);
 
-      const r = radius + (rng() - 0.5) * 35;
+      const r = radius + (rng() - 0.5) * depthJitter;
       dummy.position.set(
         r * Math.sin(phi) * Math.cos(theta),
         r * Math.cos(phi),
         r * Math.sin(phi) * Math.sin(theta),
       );
-      const s = 0.02 + rng() * 0.055;
+      const s = minSize + rng() * Math.max(0.001, maxSize - minSize);
       dummy.scale.setScalar(s);
       dummy.updateMatrix();
 
@@ -59,16 +74,16 @@ export default function InstancedStars({ count = 900, radius = 240 }: Props) {
 
     mesh.instanceMatrix.needsUpdate = true;
     if (mesh.instanceColor) mesh.instanceColor.needsUpdate = true;
-  }, [count, radius]);
+  }, [count, depthJitter, maxSize, minSize, radius]);
 
   useFrame(({ clock }) => {
     const mesh = meshRef.current;
     if (!mesh) return;
     const t = clock.getElapsedTime();
-    mesh.rotation.y = t * 0.008;
+    mesh.rotation.y = t * rotationSpeed;
     const material = mesh.material as MeshBasicMaterial;
     material.transparent = true;
-    material.opacity = 0.3 + Math.sin(t * 0.18) * 0.05;
+    material.opacity = opacityBase + Math.sin(t * 0.18) * opacityPulse;
   });
 
   return (

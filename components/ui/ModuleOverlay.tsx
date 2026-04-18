@@ -48,10 +48,10 @@ export default function ModuleOverlay({ open, title, subtitle, onClose, children
             role="dialog"
             aria-modal="true"
             aria-label={title}
-            initial={{ y: 20, scale: 0.98, opacity: 0 }}
-            animate={{ y: 0, scale: 1, opacity: 1 }}
-            exit={{ y: 12, scale: 0.98, opacity: 0 }}
-            transition={{ type: "spring", stiffness: 320, damping: 30 }}
+            initial={{ y: 26, scale: 0.9, opacity: 0 }}
+            animate={{ y: [26, -4, 0], scale: [0.9, 1.03, 1], opacity: [0, 1, 1] }}
+            exit={{ y: 14, scale: 0.96, opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
           >
             <div className="flex items-start justify-between gap-3 border-b border-white/10 px-5 py-4">
               <div>

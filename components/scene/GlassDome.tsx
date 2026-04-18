@@ -15,7 +15,7 @@ export default function GlassDome({ radius = 22, y = -3 }: Props) {
   return (
     <mesh ref={ref} position={[0, y, 0]}>
       {/* Hemisphere */}
-      <sphereGeometry args={[radius, 64, 64, 0, Math.PI * 2, 0, Math.PI / 2]} />
+      <sphereGeometry args={[radius, 40, 28, 0, Math.PI * 2, 0, Math.PI / 2]} />
       <meshPhysicalMaterial
         color="#0b0f14"
         roughness={0.18}

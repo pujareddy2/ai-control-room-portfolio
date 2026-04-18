@@ -1,33 +1,37 @@
-<svg width="1200" height="700" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Legal Guardian AI">
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0A1F3F"/>
-      <stop offset="1" stop-color="#122C54"/>
-    </linearGradient>
-    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#4CC9F0" stop-opacity="0"/>
-      <stop offset="0.5" stop-color="#4CC9F0" stop-opacity="1"/>
-      <stop offset="1" stop-color="#4CC9F0" stop-opacity="0"/>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#20060a'/>
+      <stop offset='55%' stop-color='#0c0f19'/>
+      <stop offset='100%' stop-color='#161d2a'/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="700" fill="url(#bg)"/>
-  <g opacity="0.18" stroke="#8DD6FF">
-    <path d="M40 100H1160"/>
-    <path d="M40 200H1160"/>
-    <path d="M40 300H1160"/>
-    <path d="M40 400H1160"/>
-    <path d="M40 500H1160"/>
-    <path d="M40 600H1160"/>
-  </g>
-  <g transform="translate(250,135)">
-    <rect x="120" y="70" width="460" height="360" rx="28" fill="#07162F" stroke="#72D5FF" stroke-opacity="0.7"/>
-    <rect x="160" y="110" width="380" height="280" rx="20" fill="#0F2448"/>
-    <path d="M350 152L460 202V278C460 332 418 381 350 404C282 381 240 332 240 278V202L350 152Z" fill="#57C7FF" fill-opacity="0.2" stroke="#93E2FF" stroke-width="4"/>
-    <path d="M320 276L343 300L390 250" fill="none" stroke="#C5F2FF" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
-    <rect x="220" y="335" width="260" height="16" rx="8" fill="url(#glow)"/>
-    <circle cx="214" cy="343" r="5" fill="#9BE7FF"/>
-    <circle cx="486" cy="343" r="5" fill="#9BE7FF"/>
-  </g>
-  <text x="80" y="90" fill="#B8E9FF" font-size="34" font-family="Segoe UI, Arial, sans-serif" letter-spacing="3">LEGAL GUARDIAN AI</text>
-  <text x="80" y="640" fill="#8FCDE9" font-size="22" font-family="Segoe UI, Arial, sans-serif" letter-spacing="2">Contract Intelligence | Clause Risk Analysis | AI-Assisted Review</text>
+  <rect width='1600' height='900' fill='url(#bg)'/>
+  <rect x='70' y='56' width='1460' height='788' rx='26' fill='none' stroke='#2a3342'/>
+  <text x='130' y='118' fill='#ff3b3b' font-size='42' font-family='Segoe UI,Arial' font-weight='700'>LEGAL GUARDIAN</text>
+
+  <rect x='130' y='170' width='760' height='450' rx='22' fill='rgba(120,18,25,0.35)' stroke='#3b3f4e'/>
+  <text x='165' y='230' fill='#ffacac' font-size='30' font-family='Segoe UI,Arial' font-weight='700'>NEW RELEASE</text>
+  <text x='165' y='305' fill='#f8fafc' font-size='74' font-family='Segoe UI,Arial' font-weight='800'>Watch Over Every</text>
+  <text x='165' y='385' fill='#f8fafc' font-size='74' font-family='Segoe UI,Arial' font-weight='800'>Clause Like a Pro</text>
+  <text x='165' y='448' fill='#d4d4d8' font-size='36' font-family='Segoe UI,Arial'>Drop your contract and get plain-English legal insights.</text>
+
+  <rect x='165' y='495' width='690' height='48' rx='12' fill='rgba(10,10,10,0.55)' stroke='#525b69'/>
+  <circle cx='188' cy='519' r='7' fill='#ff6b6b'/>
+  <text x='207' y='527' fill='#ffd0d0' font-size='24' font-family='Segoe UI,Arial' font-weight='700'>OFFLINE</text>
+  <text x='286' y='527' fill='#ff9d9d' font-size='24' font-family='Segoe UI,Arial'>Backend unreachable. Check API configuration.</text>
+
+  <rect x='165' y='575' width='220' height='46' rx='12' fill='rgba(35,35,35,0.7)' stroke='#6d7280'/>
+  <rect x='400' y='575' width='280' height='46' rx='12' fill='rgba(35,35,35,0.7)' stroke='#6d7280'/>
+  <rect x='695' y='575' width='220' height='46' rx='12' fill='rgba(35,35,35,0.7)' stroke='#6d7280'/>
+  <text x='182' y='606' fill='#e5e7eb' font-size='24' font-family='Segoe UI,Arial'>Fast PDF Analysis</text>
+  <text x='422' y='606' fill='#e5e7eb' font-size='24' font-family='Segoe UI,Arial'>Simple Language Summary</text>
+  <text x='719' y='606' fill='#e5e7eb' font-size='24' font-family='Segoe UI,Arial'>Built for Contracts</text>
+
+  <rect x='940' y='170' width='530' height='450' rx='22' fill='rgba(8,8,10,0.75)' stroke='#3b3f4e'/>
+  <text x='970' y='245' fill='#f1f5f9' font-size='54' font-family='Segoe UI,Arial' font-weight='700'>Analyze Document</text>
+  <text x='970' y='315' fill='#e5e7eb' font-size='34' font-family='Segoe UI,Arial'>Choose PDF document</text>
+  <rect x='970' y='335' width='250' height='38' rx='8' fill='#e5e7eb'/>
+  <rect x='970' y='395' width='240' height='52' rx='14' fill='#ff3b3b'/>
+  <text x='995' y='431' fill='#fff' font-size='30' font-family='Segoe UI,Arial' font-weight='700'>Analyze Document</text>
 </svg>

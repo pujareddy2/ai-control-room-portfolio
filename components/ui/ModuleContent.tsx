@@ -65,6 +65,16 @@ export default function ModuleContent({ id }: Props) {
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
   const [selectedExperience, setSelectedExperience] = useState<number | null>(null);
 
+  const listVariants = {
+    hidden: { opacity: 0 },
+    show: { opacity: 1, transition: { staggerChildren: 0.08 } },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 12, scale: 0.98 },
+    show: { opacity: 1, y: 0, scale: 1 },
+  };
+
   if (id === "about") {
     return (
       <div className="space-y-5 text-sm text-white/75">
@@ -118,11 +128,19 @@ export default function ModuleContent({ id }: Props) {
     const project = selectedProject != null ? PROJECTS[selectedProject] : null;
 
     return (
-      <div className="space-y-4">
+      <motion.div
+        className="space-y-4"
+        variants={listVariants}
+        initial="hidden"
+        animate="show"
+      >
         {PROJECTS.map((p, index) => (
-          <article
+          <motion.article
             key={p.title}
             className="rounded-2xl border border-white/10 bg-white/5 p-4 transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
+            variants={itemVariants}
+            transition={{ duration: 0.35 }}
+            whileHover={{ y: -2, scale: 1.01 }}
           >
             <div className="grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
               <div>
@@ -173,7 +191,7 @@ export default function ModuleContent({ id }: Props) {
               </div>
               <ProjectVisual title={p.title} image={p.image} />
             </div>
-          </article>
+          </motion.article>
         ))}
 
         <AnimatePresence>
@@ -269,15 +287,15 @@ export default function ModuleContent({ id }: Props) {
             </motion.div>
           ) : null}
         </AnimatePresence>
-      </div>
+      </motion.div>
     );
   }
 
   if (id === "skills") {
     return (
-      <div className="grid gap-4">
+      <motion.div className="grid gap-4" variants={listVariants} initial="hidden" animate="show">
         {skillGroups.map((group) => (
-          <div key={group.title} className="rounded-xl border border-white/10 bg-white/5 p-4">
+          <motion.div key={group.title} className="rounded-xl border border-white/10 bg-white/5 p-4" variants={itemVariants} transition={{ duration: 0.35 }}>
             <div className="font-heading text-xs tracking-[0.18em] text-white/85">{group.title}</div>
             <div className="mt-3 flex flex-wrap gap-2">
               {group.items.map((skill) => (
@@ -289,9 +307,9 @@ export default function ModuleContent({ id }: Props) {
                 </span>
               ))}
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     );
   }
 
@@ -299,13 +317,16 @@ export default function ModuleContent({ id }: Props) {
     const item = selectedExperience != null ? EXPERIENCE[selectedExperience] : null;
 
     return (
-      <div className="space-y-3">
+      <motion.div className="space-y-3" variants={listVariants} initial="hidden" animate="show">
         {EXPERIENCE.map((exp, index) => (
-          <button
+          <motion.button
             key={`${exp.org}-${exp.role}`}
             type="button"
             onClick={() => setSelectedExperience(index)}
             className="w-full rounded-xl border border-white/10 bg-white/5 p-4 text-left transition hover:border-cyan-300/30 hover:bg-white/[0.07]"
+            variants={itemVariants}
+            transition={{ duration: 0.35 }}
+            whileHover={{ y: -2, scale: 1.01 }}
           >
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <div className="font-heading text-xs tracking-[0.18em] text-white/85">{exp.role}</div>
@@ -313,7 +334,7 @@ export default function ModuleContent({ id }: Props) {
             </div>
             <div className="mt-1 text-sm text-white/85">{exp.org}</div>
             <div className="mt-2 text-sm text-white/70">{exp.summary}</div>
-          </button>
+          </motion.button>
         ))}
 
         <AnimatePresence>
@@ -380,7 +401,7 @@ export default function ModuleContent({ id }: Props) {
             </motion.div>
           ) : null}
         </AnimatePresence>
-      </div>
+      </motion.div>
     );
   }
 

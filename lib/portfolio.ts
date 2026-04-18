@@ -6,6 +6,12 @@ export type ModuleId =
   | "certifications"
   | "contact";
 
+export type ModuleTheme = {
+  accent: string;
+  glow: string;
+  label: string;
+};
+
 export type PortfolioProject = {
   title: string;
   subtitle?: string;
@@ -64,13 +70,22 @@ export const MODULES: { id: ModuleId; label: string }[] = [
   { id: "contact", label: "CONTACT" },
 ];
 
+export const MODULE_THEMES: Record<ModuleId, ModuleTheme> = {
+  about: { accent: "#8ddcff", glow: "rgba(141, 220, 255, 0.28)", label: "ABOUT" },
+  projects: { accent: "#5eead4", glow: "rgba(94, 234, 212, 0.28)", label: "PROJECTS" },
+  skills: { accent: "#7dd3fc", glow: "rgba(125, 211, 252, 0.28)", label: "SKILLS" },
+  experience: { accent: "#a78bfa", glow: "rgba(167, 139, 250, 0.28)", label: "EXPERIENCE" },
+  certifications: { accent: "#fbbf24", glow: "rgba(251, 191, 36, 0.28)", label: "CERTIFICATIONS" },
+  contact: { accent: "#f97316", glow: "rgba(249, 115, 22, 0.28)", label: "CONTACT" },
+};
+
 export const ABOUT = {
   name: "Puja Midde",
   title: "Applied AI Developer | Machine Learning Engineer",
   college: "Stanley College of Engineering and Technology for Women, Hyderabad",
   education: "Final-year B.E. Computer Science (CGPA: 8.8/10)",
   summary:
-    "Welcome to the About Section. I am a final-year B.E. Computer Science student focused on Applied AI and Machine Learning. I build AI-driven tools, ML systems, and interactive web experiences with a strong focus on practical problem solving, GenAI, and useful real-world systems.",
+    "Final-year Computer Science student and fresher focused on Applied AI, Machine Learning, and production-ready intelligent systems. I build practical AI solutions with strong foundations in NLP, LLM workflows, full-stack APIs, and data-driven engineering.",
 };
 
 export const PROJECTS: PortfolioProject[] = [
@@ -111,7 +126,7 @@ export const PROJECTS: PortfolioProject[] = [
     subtitle: "Ayurvedic AI Health Assistant",
     image: "/projects/ayucare.svg",
     summary:
-      "AI Ayurvedic healthcare assistant prototype built for AIHackDays 2025 (Runner-Up).",
+      "AI-driven Ayurvedic wellness platform for plant scanning, health guidance, and smart recommendations.",
     paragraphs: [
       "Developed an AI-driven healthcare assistant integrating Teachable Machine image classification and OpenAI chatbot capabilities to support real-time wellness exploration and medicinal-plant guidance.",
       "Implemented FastAPI backend services with Firebase integration for real-time health tracking, symptom support, and connected feature modules across chatbot, tracker, store, and recommendation flows.",
@@ -121,7 +136,7 @@ export const PROJECTS: PortfolioProject[] = [
       "Integrated Teachable Machine + OpenAI API for AI classification and chatbot assistance",
       "Implemented backend using FastAPI and Firebase for real-time data workflows",
       "Designed features including AI chatbot, symptom tracker, Ayurvedic store, and wellness recommendations",
-      "Delivered a complete working AI + healthcare prototype in a hackathon environment",
+      "Delivered an end-to-end AI + healthcare product experience from scan to recommendation",
     ],
     stack: [
       "FastAPI",
@@ -159,22 +174,22 @@ export const PROJECTS: PortfolioProject[] = [
     links: {},
   },
   {
-    title: "AI-Driven Stay Booking Web App",
-    subtitle: "Lovable AI Platform Build",
+    title: "Canoply",
+    subtitle: "Modern SaaS Product Landing Experience",
     image: "/projects/stay-booking.svg",
     summary:
-      "Full-stack stay-booking application built with Lovable AI-powered code generation.",
+      "Modern product landing and conversion-oriented web experience with clean section architecture.",
     paragraphs: [
-      "Built a stay-booking web application with full-stack flow support, including listing discovery, booking lifecycle handling, responsive UI behavior, and persistent data interactions.",
-      "Leveraged AI-assisted full-stack generation to accelerate delivery while validating backend logic, database operations, and booking workflows through focused end-to-end testing.",
+      "Designed and implemented a polished product interface with strong hero messaging, feature storytelling, and clear CTA structure for better user onboarding and conversion flow.",
+      "Focused on responsive design, smooth interactions, and production-ready component structure to make the landing journey professional across desktop and mobile.",
     ],
     highlights: [
-      "Implemented stay listing, booking flow, data persistence, and responsive UI",
-      "Reduced development time by approximately 60% using AI-assisted generation",
-      "Validated backend logic, database operations, and booking workflows through testing",
-      "Demonstrated rapid MVP delivery using practical AI engineering workflows",
+      "Built a visually consistent, conversion-friendly UI with clear navigation",
+      "Implemented responsive layouts and smooth motion-based interactions",
+      "Structured sections for marketing, trust signals, and action flow",
+      "Delivered a professional SaaS-style product showcase experience",
     ],
-    stack: ["React", "AI-assisted Full Stack", "Lovable"],
+    stack: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     links: {
       live: "https://lovable.dev/projects/7e7129c5-0f29-42e7-ae7c-9f7169a43340",
     },
@@ -238,7 +253,10 @@ export const PROJECTS: PortfolioProject[] = [
       "Prompt engineering for reliable document actions",
     ],
     stack: ["Gemini AI", "Notion API", "Prompt Engineering", "Automation"],
-    links: {},
+    links: {
+      live: "https://notion-assistant.vercel.app/",
+      github: "https://github.com/pujareddy2/notion-assistant.git",
+    },
   },
   {
     title: "Airbnb Price Prediction",
@@ -256,7 +274,9 @@ export const PROJECTS: PortfolioProject[] = [
       "Scikit-learn based reproducible pipeline",
     ],
     stack: ["Python", "Scikit-learn", "Pandas", "Regression"],
-    links: {},
+    links: {
+      github: "https://github.com/pujareddy2/airbnb.git",
+    },
   },
   {
     title: "ProductHub",
@@ -274,7 +294,10 @@ export const PROJECTS: PortfolioProject[] = [
       "Deployment-ready structure and API-driven UI behavior",
     ],
     stack: ["React", "Flask", "REST API", "JavaScript", "Python"],
-    links: {},
+    links: {
+      live: "https://pujareddy2.github.io/ProductHub/",
+      github: "https://github.com/pujareddy2/ProductHub.git",
+    },
   },
 ];
 
@@ -329,16 +352,18 @@ export const EXPERIENCE: PortfolioExperience[] = [
     role: "AI Developer Intern",
     duration: "May 2025 - Present",
     summary:
-      "Built Telugu LLM chatbot systems with measurable quality improvements through dataset curation and prompt optimization.",
+      "Engineering production-grade Telugu LLM chatbot pipelines with measurable quality and accuracy improvements.",
     paragraphs: [
-      "At Viswam.AI, I worked on production-grade regional language AI, focusing on Telugu conversational systems. I curated 80+ corpus dataset files and improved model quality by building cleaner training data pipelines and stronger prompt structures for intent-heavy interactions.",
-      "The work included transformer-based NLP pipelines, intent-classification tuning, and practical RAG workflow experimentation for document-grounded responses. I collaborated with research teams to strengthen multilingual pipeline reliability and reduce conversational error rates.",
+      "Built transformer-based Telugu NLP systems by curating 80+ high-quality corpus datasets and improving training reliability for production conversational AI behavior.",
+      "Worked on intent classification, prompt engineering, and RAG-integrated workflows in collaboration with IIIT Hyderabad research teams for scalable regional-language AI systems.",
     ],
-    tools: ["Python", "HuggingFace", "LLM Prompt Engineering", "RAG", "NLP Pipelines"],
+    tools: ["Python", "HuggingFace", "Transformers", "RAG", "Prompt Engineering"],
     outcomes: [
-      "Improved response accuracy by approximately 30%",
-      "Reduced conversational errors by approximately 25%",
-      "Contributed to scalable regional language AI workflows",
+      "Engineered a production-grade Telugu LLM chatbot by curating 80+ corpus datasets and fine-tuning transformer NLP pipelines, improving response accuracy by 30%.",
+      "Designed and optimized intent classification workflows with prompt engineering, reducing conversational errors by 25%.",
+      "Built and tested RAG-based chatbot pipelines integrating document retrieval and LLM inference for contextual responses.",
+      "Collaborated with IIIT Hyderabad researchers on NLP architecture and dataset structuring for scalable regional AI systems.",
+      "Worked on tokenization, embeddings, and preprocessing to improve multilingual conversational model performance.",
     ],
   },
   {
@@ -346,16 +371,18 @@ export const EXPERIENCE: PortfolioExperience[] = [
     role: "Data Science & Machine Learning Intern",
     duration: "Feb 2026 - Present",
     summary:
-      "Conducting structured AI and analytics research for space robotics, lunar mining, and autonomous mission concepts.",
+      "Applying machine learning and analytics to space robotics and autonomous mission intelligence workflows.",
     paragraphs: [
-      "At Lunabers, I analyze space-technology research data and build structured technical frameworks around robotic autonomy, mission planning, and lunar resource operations. My internship focuses on converting exploratory research into organized and decision-ready technical insights.",
-      "I contribute through technical reporting, conceptual modeling, and AI-assisted analysis workflows that improve research clarity for early-stage space systems. The work blends AI, data analytics, and robotics-oriented systems thinking in a high-complexity domain.",
+      "Contributed to AI research around autonomous decision-making for lunar mining and extraterrestrial robotics through structured analysis frameworks.",
+      "Translated high-complexity space-tech datasets into actionable insights and technical reports for cross-functional research communication.",
     ],
-    tools: ["Research Analytics", "ML Concepts", "Data Structuring", "Technical Reporting"],
+    tools: ["Machine Learning", "Research Analytics", "Data Structuring", "Technical Reporting"],
     outcomes: [
-      "Improved clarity of complex research deliverables",
-      "Reduced analysis effort through structured frameworks",
-      "Contributed to conceptual modeling for lunar operations",
+      "Applied machine learning techniques to space robotics datasets for autonomous decision-making analysis.",
+      "Developed structured AI research frameworks that improved documentation clarity and reduced analysis time.",
+      "Conducted research on robotic autonomy, mission planning, and intelligent control systems with actionable outputs.",
+      "Produced analytical reports on AI-driven space exploration models for technical team communication.",
+      "Explored integration of AI, robotics, and analytics for next-generation space infrastructure concepts.",
     ],
   },
   {
@@ -363,50 +390,37 @@ export const EXPERIENCE: PortfolioExperience[] = [
     role: "Machine Learning Research Intern",
     duration: "Feb 2025 - Apr 2025",
     summary:
-      "Designed ML preprocessing pipelines for intrusion detection using network traffic features and anomaly-focused analysis.",
+      "Built intrusion-detection-ready ML pipelines with deep feature engineering and robust preprocessing workflows.",
     paragraphs: [
-      "This research internship focused on IDS-oriented machine learning workflows. I analyzed CICIDS-style traffic datasets and engineered 55+ network flow features, including packet statistics, TCP flags, and inter-arrival metrics relevant for attack detection.",
-      "I built preprocessing strategies to address missing values, infinite values, and outliers, while studying multi-class attack behavior such as DoS, PortScan, Bot, and BruteForce patterns. The result was a more robust foundation for downstream intrusion-detection modeling.",
+      "Engineered rich network traffic features and developed data preprocessing systems for reliable training quality in cybersecurity ML pipelines.",
+      "Performed attack-class analysis and interpretability studies to improve practical anomaly-detection model readiness.",
     ],
-    tools: ["Python", "Pandas", "NumPy", "Jupyter", "Cybersecurity Datasets"],
+    tools: ["Python", "Pandas", "Feature Engineering", "EDA", "Cybersecurity ML"],
     outcomes: [
-      "Built structured IDS preprocessing pipeline",
-      "Improved data quality for model readiness",
-      "Enhanced attack pattern analysis and interpretability",
+      "Engineered 55+ packet and flow-level network features for intrusion detection modeling using Python and Pandas.",
+      "Built complete preprocessing pipelines handling missing values, infinite values, and outliers for high-quality datasets.",
+      "Performed multi-class attack classification across DoS, PortScan, Bot, and BruteForce categories.",
+      "Conducted exploratory analysis and feature correlation studies to improve model interpretability and accuracy.",
+      "Contributed to production-level anomaly-detection workflow design for cybersecurity ML systems.",
     ],
   },
   {
-    org: "Microsoft / Edunet Foundation / AICTE",
-    role: "AI Intern",
-    duration: "Apr 2025 - May 2025",
-    summary:
-      "Completed Microsoft GenAI learning track and trained 50+ learners in practical AI productivity workflows.",
-    paragraphs: [
-      "I completed 26 Microsoft Learn modules focused on Generative AI, Responsible AI, and Copilot productivity patterns. The program sharpened my understanding of enterprise AI adoption and responsible-use principles in real-world settings.",
-      "Beyond learning modules, I delivered practical sessions for more than 50 learners, translating advanced AI concepts into usable workflows for task automation, content generation, and responsible AI behavior in productivity environments.",
-    ],
-    tools: ["Microsoft Learn", "Microsoft Copilot", "Responsible AI"],
-    outcomes: [
-      "Completed 26 AI learning modules",
-      "Trained 50+ learners on applied AI usage",
-      "Strengthened enterprise-AI implementation understanding",
-    ],
-  },
-  {
-    org: "Shell India / Edunet Foundation",
+    org: "Shell India (Edunet Foundation)",
     role: "Data Analytics Intern",
     duration: "Feb 2025 - Mar 2025",
     summary:
-      "Automated ETL and built KPI dashboards for supply-chain reporting and operational visibility.",
+      "Automated ETL and built KPI dashboards for supply-chain visibility and faster data-driven reporting.",
     paragraphs: [
-      "During this internship, I worked on supply-chain analytics workflows and automated ETL processes to reduce manual reporting effort. I transformed operational datasets into clean analysis-ready models for dashboarding and decision support.",
-      "I created Power BI dashboards tracking delivery timelines, supplier behavior, and defect patterns with better clarity and filterability. This improved reporting speed and made KPI insights more actionable for operational review.",
+      "Automated data processing workflows and improved business reporting speed through cleaner ETL and data modeling pipelines.",
+      "Developed dashboard systems with KPI tracking for operations, supplier performance, and delivery-quality decision support.",
     ],
-    tools: ["Power BI", "ETL", "Data Modeling", "Supply Chain Analytics"],
+    tools: ["Power BI", "ETL", "Data Modeling", "Analytics"],
     outcomes: [
-      "Reduced manual reporting effort by approximately 40%",
-      "Improved reporting clarity by approximately 30%",
-      "Enabled stronger KPI-driven decision support",
+      "Automated end-to-end ETL workflows for supply chain datasets, reducing manual reporting effort by 40%.",
+      "Designed Power BI dashboards for timeline, supplier, and defect KPIs, improving clarity by 30%.",
+      "Built relationship-driven data models enabling dynamic filtering and real-time business insight.",
+      "Analyzed logistics and operations data to identify bottlenecks and optimization opportunities.",
+      "Translated raw datasets into decision-ready insights through clear visual analytics workflows.",
     ],
   },
   {
@@ -414,16 +428,37 @@ export const EXPERIENCE: PortfolioExperience[] = [
     role: "Web Development Intern",
     duration: "Apr 2025 - May 2025",
     summary:
-      "Built responsive React components and API-driven modules with measurable frontend performance improvements.",
+      "Developed responsive React interfaces and API-driven modules with improved frontend performance.",
     paragraphs: [
-      "At ApexPlanet, I developed 7+ responsive UI components and integrated REST API flows with MySQL-backed systems. The internship emphasized practical frontend engineering for real user interactions and data-backed interfaces.",
-      "I worked on CRUD modules, interactive forms, and dynamic component rendering while optimizing API behavior to reduce page data load time. This improved both responsiveness and reliability for common application tasks.",
+      "Built reusable frontend components and integrated API-driven data behavior for practical business workflow interfaces.",
+      "Focused on usability, rendering optimization, and backend-connected CRUD modules for real-world web app functionality.",
     ],
-    tools: ["React", "HTML", "CSS", "JavaScript", "REST APIs", "MySQL"],
+    tools: ["React", "JavaScript", "HTML", "CSS", "REST API", "MySQL"],
     outcomes: [
-      "Built 7+ reusable UI components",
-      "Reduced application load time by approximately 20%",
-      "Improved API-driven UI flow reliability",
+      "Developed 7+ responsive UI components using React, HTML, CSS, and JavaScript for better usability.",
+      "Integrated REST APIs with MySQL-backed systems for dynamic data handling.",
+      "Reduced application load time by 20% through optimized API calls and component rendering.",
+      "Built CRUD modules, interactive forms, and API-driven features for practical product use cases.",
+      "Strengthened frontend architecture and state-driven workflow implementation through production tasks.",
+    ],
+  },
+  {
+    org: "Microsoft (Edunet Foundation & AICTE)",
+    role: "AI Intern",
+    duration: "Apr 2025 - May 2025",
+    summary:
+      "Completed structured GenAI upskilling and delivered practical AI productivity sessions for learners.",
+    paragraphs: [
+      "Completed Microsoft Learn training tracks on Generative AI, Responsible AI, and Copilot workflows aligned with enterprise use cases.",
+      "Delivered practical sessions to learners on AI-assisted productivity and real-world responsible AI adoption patterns.",
+    ],
+    tools: ["Microsoft Learn", "Microsoft Copilot", "Responsible AI", "GenAI Workflows"],
+    outcomes: [
+      "Completed 26 Microsoft Learn modules across Generative AI, Responsible AI, and Copilot.",
+      "Delivered AI productivity training sessions to 50+ learners using practical use cases.",
+      "Applied Microsoft Copilot for automation, content generation, and workflow optimization.",
+      "Gained practical exposure to fairness, transparency, and ethical AI deployment principles.",
+      "Strengthened understanding of enterprise-grade AI tools and ecosystems aligned with industry standards.",
     ],
   },
 ];

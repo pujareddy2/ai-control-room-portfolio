@@ -1,8 +1,8 @@
 "use client";
 
-import { useFrame, useLoader } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { AdditiveBlending, TextureLoader } from "three";
+import { AdditiveBlending } from "three";
 import type { Group, Mesh } from "three";
 
 type Props = {
@@ -11,11 +11,8 @@ type Props = {
 
 export default function AICore({ position = [0, -0.5, 0] }: Props) {
   const rootRef = useRef<Group | null>(null);
-  const imageRef = useRef<Mesh | null>(null);
   const cageRef = useRef<Mesh | null>(null);
   const haloRef = useRef<Mesh | null>(null);
-
-  const coreTexture = useLoader(TextureLoader, "/textures/ai-core.webp");
 
   useFrame(({ clock }) => {
     const t = clock.getElapsedTime();
@@ -23,10 +20,6 @@ export default function AICore({ position = [0, -0.5, 0] }: Props) {
     if (rootRef.current) {
       rootRef.current.position.y = position[1] + Math.sin(t * 0.65) * 0.08;
       rootRef.current.rotation.y = t * 0.14;
-    }
-
-    if (imageRef.current) {
-      imageRef.current.rotation.y = Math.sin(t * 0.2) * 0.12;
     }
 
     if (cageRef.current) {
@@ -41,19 +34,6 @@ export default function AICore({ position = [0, -0.5, 0] }: Props) {
 
   return (
     <group ref={rootRef} position={position}>
-      <mesh ref={imageRef} position={[0, 0, 0]}>
-        <planeGeometry args={[3.8, 3.8]} />
-        <meshStandardMaterial
-          map={coreTexture}
-          emissiveMap={coreTexture}
-          emissive="#9cd8ff"
-          emissiveIntensity={0.55}
-          roughness={0.5}
-          metalness={0.05}
-          transparent
-        />
-      </mesh>
-
       <mesh ref={cageRef}>
         <icosahedronGeometry args={[2.12, 1]} />
         <meshStandardMaterial

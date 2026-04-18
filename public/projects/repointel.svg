@@ -1,22 +1,35 @@
-<svg width="1200" height="700" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RepoinTel">
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#12212D"/>
-      <stop offset="1" stop-color="#204257"/>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#0b1020'/>
+      <stop offset='100%' stop-color='#121a2b'/>
     </linearGradient>
+    <radialGradient id='glow' cx='80%' cy='15%' r='45%'>
+      <stop offset='0%' stop-color='#38bdf8' stop-opacity='0.34'/>
+      <stop offset='100%' stop-color='#38bdf8' stop-opacity='0'/>
+    </radialGradient>
   </defs>
-  <rect width="1200" height="700" fill="url(#bg)"/>
-  <g transform="translate(220,120)">
-    <rect x="100" y="65" width="600" height="440" rx="26" fill="#0C1823" stroke="#84D9FF" stroke-opacity="0.6"/>
-    <rect x="145" y="110" width="510" height="85" rx="14" fill="#143044"/>
-    <circle cx="180" cy="152" r="12" fill="#9BE4FF"/>
-    <rect x="205" y="140" width="430" height="24" rx="12" fill="#28516A"/>
-    <rect x="145" y="225" width="240" height="245" rx="14" fill="#132A3A"/>
-    <rect x="415" y="225" width="240" height="245" rx="14" fill="#132A3A"/>
-    <path d="M174 275H356M174 312H356M174 349H356M444 275H626M444 312H626M444 349H626" stroke="#7BCFF7" stroke-opacity="0.9" stroke-width="6" stroke-linecap="round"/>
-    <circle cx="322" cy="430" r="26" fill="none" stroke="#BEEBFF" stroke-width="5"/>
-    <path d="M340 448L364 472" stroke="#BEEBFF" stroke-width="6" stroke-linecap="round"/>
-  </g>
-  <text x="80" y="90" fill="#CBF0FF" font-size="34" font-family="Segoe UI, Arial, sans-serif" letter-spacing="3">REPOINTEL</text>
-  <text x="80" y="640" fill="#9CC8DC" font-size="22" font-family="Segoe UI, Arial, sans-serif" letter-spacing="2">GitHub Repository Intelligence | LLM Summaries | Architecture Insights</text>
+
+  <rect width='1600' height='900' fill='url(#bg)'/>
+  <rect width='1600' height='900' fill='url(#glow)'/>
+
+  <rect x='90' y='70' width='1420' height='760' rx='28' fill='#0b1323' stroke='#334155' stroke-width='2'/>
+  <rect x='90' y='70' width='1420' height='58' rx='28' fill='#0f172a'/>
+  <circle cx='130' cy='99' r='8' fill='#ef4444'/>
+  <circle cx='156' cy='99' r='8' fill='#f59e0b'/>
+  <circle cx='182' cy='99' r='8' fill='#22c55e'/>
+
+  <rect x='140' y='150' width='860' height='550' rx='16' fill='#0b1220' stroke='#334155'/>
+  <rect x='1040' y='150' width='420' height='250' rx='16' fill='#0b1220' stroke='#334155'/>
+  <rect x='1040' y='430' width='420' height='270' rx='16' fill='#0b1220' stroke='#334155'/>
+
+  <rect x='1070' y='190' width='220' height='14' rx='7' fill='#38bdf8'/>
+  <rect x='1070' y='218' width='340' height='11' rx='5' fill='#64748b'/>
+  <rect x='1070' y='242' width='310' height='11' rx='5' fill='#64748b'/>
+  <rect x='1070' y='266' width='330' height='11' rx='5' fill='#64748b'/>
+
+  <circle cx='280' cy='240' r='26' fill='#38bdf8'/><circle cx='450' cy='200' r='26' fill='#38bdf8'/><circle cx='610' cy='260' r='26' fill='#38bdf8'/><circle cx='360' cy='390' r='26' fill='#38bdf8'/><circle cx='540' cy='410' r='26' fill='#38bdf8'/><line x1='280' y1='240' x2='450' y2='200' stroke='#7dd3fc' stroke-width='5'/><line x1='450' y1='200' x2='610' y2='260' stroke='#7dd3fc' stroke-width='5'/><line x1='450' y1='200' x2='360' y2='390' stroke='#7dd3fc' stroke-width='5'/><line x1='360' y1='390' x2='540' y2='410' stroke='#7dd3fc' stroke-width='5'/>
+
+  <text x='140' y='785' fill='#e2e8f0' font-size='46' font-family='Segoe UI,Arial' font-weight='700'>RepoinTel</text>
+  <text x='140' y='830' fill='#38bdf8' font-size='24' font-family='Segoe UI,Arial'>Repository Intelligence</text>
 </svg>

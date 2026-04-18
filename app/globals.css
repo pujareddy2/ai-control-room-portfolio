@@ -30,13 +30,90 @@
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 18% 8%, rgba(71, 106, 161, 0.22), transparent 38%),
+    radial-gradient(circle at 82% 12%, rgba(53, 89, 154, 0.16), transparent 34%),
+    linear-gradient(180deg, #030711 0%, #02050d 44%, #020307 100%);
   color: var(--foreground);
   font-family: var(--font-body);
+}
+
+@keyframes hudDrift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-40px, -20px, 0);
+  }
+}
+
+@keyframes scanlineMove {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}
+
+@keyframes textShimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }
 
 @layer utilities {
   .font-heading {
     font-family: var(--font-heading);
+  }
+
+  .hud-grid-bg {
+    background-image:
+      linear-gradient(rgba(74, 139, 186, 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74, 139, 186, 0.08) 1px, transparent 1px);
+    background-size: 52px 52px;
+    animation: hudDrift 20s linear infinite;
+  }
+
+  .scanline-overlay {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanline-overlay::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 34%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 229, 255, 0.12), transparent);
+    animation: scanlineMove 5.4s linear infinite;
+    pointer-events: none;
+  }
+
+  .hud-pulse-dot {
+    animation: pulseGlow 1.8s ease-in-out infinite;
+  }
+
+  .text-shimmer {
+    background: linear-gradient(90deg, #d8efff 0%, #aee4ff 35%, #ffffff 50%, #aee4ff 70%, #d8efff 100%);
+    background-size: 200% auto;
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: textShimmer 4.6s linear infinite;
   }
 }

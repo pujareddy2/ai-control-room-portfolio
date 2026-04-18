@@ -1,23 +1,35 @@
-<svg width="1200" height="700" viewBox="0 0 1200 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="AyuCare">
+﻿<svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900' viewBox='0 0 1600 900'>
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#08362B"/>
-      <stop offset="1" stop-color="#0B4E3B"/>
+    <linearGradient id='bg' x1='0' y1='0' x2='1' y2='1'>
+      <stop offset='0%' stop-color='#e8ddc8'/>
+      <stop offset='60%' stop-color='#d7d9cc'/>
+      <stop offset='100%' stop-color='#c3d8c7'/>
     </linearGradient>
   </defs>
-  <rect width="1200" height="700" fill="url(#bg)"/>
-  <g opacity="0.2" fill="#8EEBC8">
-    <circle cx="180" cy="110" r="38"/>
-    <circle cx="1060" cy="620" r="52"/>
-    <circle cx="1040" cy="140" r="26"/>
-  </g>
-  <g transform="translate(260,120)">
-    <rect x="130" y="40" width="420" height="500" rx="34" fill="#072B21" stroke="#A8F5D7" stroke-opacity="0.6"/>
-    <rect x="165" y="86" width="350" height="370" rx="24" fill="#114636"/>
-    <path d="M340 165C410 110 468 170 449 233C433 290 367 305 340 344C313 305 247 290 231 233C212 170 270 110 340 165Z" fill="#84E6BC" fill-opacity="0.35" stroke="#C8FAE4" stroke-width="4"/>
-    <rect x="246" y="374" width="188" height="54" rx="13" fill="#0A392C" stroke="#8FE8C7" stroke-opacity="0.65"/>
-    <text x="278" y="409" fill="#D8FFF2" font-size="28" font-family="Segoe UI, Arial, sans-serif">AI CARE</text>
-  </g>
-  <text x="80" y="90" fill="#C8FFEA" font-size="34" font-family="Segoe UI, Arial, sans-serif" letter-spacing="3">AYUCARE</text>
-  <text x="80" y="640" fill="#9FDFC4" font-size="22" font-family="Segoe UI, Arial, sans-serif" letter-spacing="2">AI Wellness Assistant | Medicinal Plant Classification | Symptom Support</text>
+  <rect width='1600' height='900' fill='url(#bg)'/>
+  <rect x='100' y='48' width='1400' height='72' rx='36' fill='rgba(255,255,255,0.62)'/>
+  <text x='130' y='93' fill='#35574b' font-size='44' font-family='Times New Roman,serif'>AYUCARE</text>
+  <text x='1040' y='93' fill='#315548' font-size='36' font-family='Segoe UI,Arial' font-weight='700'>Scanner</text>
+  <text x='1145' y='93' fill='#315548' font-size='36' font-family='Segoe UI,Arial' font-weight='700'>Herb Gallery</text>
+  <text x='1320' y='93' fill='#315548' font-size='36' font-family='Segoe UI,Arial' font-weight='700'>Tools</text>
+
+  <text x='130' y='365' fill='#b66e35' font-size='40' font-family='Segoe UI,Arial' font-weight='700'>ANCIENT ROOTS. MODERN WELLNESS.</text>
+  <text x='130' y='438' fill='#21392f' font-size='74' font-family='Georgia,serif' font-weight='700'>IMMERSIVE AYURVEDIC</text>
+  <text x='130' y='510' fill='#21392f' font-size='74' font-family='Georgia,serif' font-weight='700'>WELLNESS PLATFORM</text>
+  <text x='130' y='565' fill='#2f4f43' font-size='43' font-family='Segoe UI,Arial'>Explore curated herbs, scan leaves in real time, and</text>
+  <text x='130' y='612' fill='#2f4f43' font-size='43' font-family='Segoe UI,Arial'>connect with AyuCare wellness modules.</text>
+
+  <rect x='130' y='640' width='310' height='64' rx='32' fill='#2b6b4e'/>
+  <text x='160' y='683' fill='#f8fafc' font-size='40' font-family='Segoe UI,Arial' font-weight='700'>Start Plant Scan</text>
+  <rect x='455' y='640' width='290' height='64' rx='32' fill='rgba(255,255,255,0.55)' stroke='#9ab3a8'/>
+  <text x='485' y='683' fill='#2f5d4c' font-size='40' font-family='Segoe UI,Arial' font-weight='700'>Explore Modules</text>
+
+  <rect x='840' y='250' width='620' height='500' rx='30' fill='rgba(255,255,255,0.38)'/>
+  <rect x='820' y='370' width='190' height='320' rx='22' fill='#f5f5f4' stroke='#d4d4d8'/>
+  <rect x='980' y='360' width='210' height='340' rx='22' fill='#f5f5f4' stroke='#d4d4d8'/>
+  <rect x='1160' y='370' width='200' height='320' rx='22' fill='#f5f5f4' stroke='#d4d4d8'/>
+  <rect x='990' y='392' width='190' height='200' rx='16' fill='#d97706'/>
+  <circle cx='1085' cy='600' r='26' fill='#14532d'/>
+  <rect x='842' y='406' width='146' height='222' rx='18' fill='#e7e5e4'/>
+  <rect x='1182' y='410' width='154' height='236' rx='18' fill='#dcfce7'/>
 </svg>

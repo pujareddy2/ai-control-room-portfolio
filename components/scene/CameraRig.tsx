@@ -7,10 +7,16 @@ import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 
 type Props = {
   target?: [number, number, number];
+  focusLevel?: number;
+  punch?: number;
+  onDistanceChange?: (distance: number) => void;
+  zoomIntent?: "in" | "out" | null;
 };
 
-export default function CameraRig({ target = [0, -1.5, 0] }: Props) {
+export default function CameraRig({ target = [0, -1.5, 0], focusLevel = 0, punch = 0, onDistanceChange, zoomIntent = null }: Props) {
   const controlsRef = useRef<OrbitControlsImpl | null>(null);
+  const currentTargetRef = useRef<[number, number, number]>(target);
+  const lastDistanceRef = useRef<number | null>(null);
 
   const keysRef = useRef<Record<string, boolean>>({});
 
@@ -34,7 +40,21 @@ export default function CameraRig({ target = [0, -1.5, 0] }: Props) {
     if (!controls) return;
     controls.target.set(target[0], target[1], target[2]);
     controls.update();
+    currentTargetRef.current = target;
   }, [target]);
+
+  useEffect(() => {
+    const controls = controlsRef.current;
+    if (!controls || zoomIntent == null) return;
+
+    if (zoomIntent === "in") {
+      controls.dollyIn(1.12);
+    } else {
+      controls.dollyOut(1.12);
+    }
+
+    controls.update();
+  }, [zoomIntent]);
 
   useFrame((_, delta) => {
     const controls = controlsRef.current;
@@ -65,6 +85,24 @@ export default function CameraRig({ target = [0, -1.5, 0] }: Props) {
     if (zoomIn) controls.dollyIn(1 + dolly);
     if (zoomOut) controls.dollyOut(1 + dolly);
 
+    const targetBreathe = 0.12 + punch * 0.18;
+    const targetRise = currentTargetRef.current[1] + Math.sin((punch + focusLevel) * Math.PI) * targetBreathe;
+    controls.target.y += (targetRise - controls.target.y) * 0.08;
+
+    const currentDistance = controls.getDistance();
+    if (onDistanceChange) {
+      const last = lastDistanceRef.current;
+      if (last == null || Math.abs(last - currentDistance) > 0.03) {
+        onDistanceChange(currentDistance);
+        lastDistanceRef.current = currentDistance;
+      }
+    }
+
+    controls.enableRotate = false;
+    controls.enableZoom = true;
+    controls.autoRotate = false;
+    controls.rotateSpeed = 0;
+
     controls.update();
   });
 
@@ -72,11 +110,12 @@ export default function CameraRig({ target = [0, -1.5, 0] }: Props) {
     <OrbitControls
       ref={controlsRef}
       enableDamping
-      dampingFactor={0.08}
-      rotateSpeed={0.5}
-      zoomSpeed={0.6}
+      dampingFactor={0.1}
+      rotateSpeed={0}
+      zoomSpeed={0.75}
       enablePan={false}
-      minDistance={10}
+      enableZoom
+      minDistance={8.2}
       maxDistance={30}
       minPolarAngle={Math.PI / 4}
       maxPolarAngle={(3 * Math.PI) / 4}
