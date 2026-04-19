@@ -19,6 +19,9 @@ export default function About() {
             </span>
           </h2>
           <div className="mx-auto mb-12 h-1 w-24 bg-gradient-to-r from-gray-400 to-gray-200" />
+          <h3 className="mx-auto mb-10 max-w-[900px] text-center font-heading text-[clamp(1.65rem,2.8vw,2.1rem)] font-bold leading-[1.25] tracking-[0.015em] text-[#E6EDF3] [text-shadow:0_0_10px_rgba(230,237,243,0.1)]">
+            Applied AI Developer | Machine Learning Enthusiast
+          </h3>
         </motion.div>
 
         <div className="mb-12 grid gap-12 md:grid-cols-2">
@@ -27,17 +30,22 @@ export default function About() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="space-y-4 text-base leading-relaxed text-gray-300 md:text-[1.03rem]"
+            className="space-y-5 text-base leading-relaxed text-gray-300 md:text-[1.03rem]"
           >
-            <p>
-              I&apos;m a fresher and final-year Computer Science student at <strong className="text-sky-100">{ABOUT.college}</strong>, focused on Applied AI and Machine Learning.
-            </p>
-            <p>
-              I enjoy building meaningful, real-world solutions from AI ideas, whether it is intelligent assistants, data-driven tools, or full-stack ML products.
-            </p>
-            <p>
-              I bring a positive, disciplined engineering mindset with strong foundations in <span className="text-teal-100">Python</span>, <span className="text-cyan-100">NLP</span>, LLM workflows, and API integration.
-            </p>
+            <div className="mx-auto mb-6 mt-6 max-w-[700px] text-center">
+              <p className="mx-auto mt-3 max-w-[560px] text-[0.96rem] font-normal leading-[1.65] text-[#9BA3AF] md:text-[1rem]">
+                Focused on developing real-world AI solutions including intelligent systems, data-driven tools, and scalable ML applications.
+              </p>
+            </div>
+
+            <div className="max-w-[600px] space-y-4 text-left text-[0.96rem] leading-[1.68] text-[#9BA3AF] md:text-[1rem]">
+              <p>
+                I&apos;m a final-year Computer Science student at <strong className="text-sky-100">{ABOUT.college}</strong>, with a strong focus on Applied AI and Machine Learning. I enjoy building practical solutions that translate AI concepts into real-world applications.
+              </p>
+              <p>
+                I bring a disciplined engineering mindset with hands-on experience in <span className="text-teal-100">Python</span>, <span className="text-cyan-100">NLP</span>, LLM workflows, and API integration, aiming to create efficient and scalable intelligent systems.
+              </p>
+            </div>
           </motion.div>
 
           <motion.div

@@ -75,6 +75,32 @@ body {
   }
 }
 
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.05);
+  }
+}
+
+@keyframes starShimmer {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(1);
+    filter: saturate(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+    filter: saturate(1.06);
+  }
+}
+
 @layer utilities {
   .font-heading {
     font-family: var(--font-heading);
@@ -115,5 +141,15 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     animation: textShimmer 4.6s linear infinite;
+  }
+
+  .star-twinkle {
+    animation: starTwinkle 12s ease-in-out infinite;
+    will-change: opacity, transform;
+  }
+
+  .star-shimmer {
+    animation: starShimmer 16s ease-in-out infinite;
+    will-change: opacity, transform, filter;
   }
 }

@@ -186,6 +186,7 @@ export default function ControlRoom() {
 
     const armAmbient = () => {
       setAmbientEnabled(true);
+      window.dispatchEvent(new CustomEvent("portfolio-night-audio", { detail: { enabled: true } }));
       window.removeEventListener("pointerdown", armAmbient);
       window.removeEventListener("keydown", armAmbient);
       window.removeEventListener("wheel", armAmbient);
@@ -341,7 +342,11 @@ export default function ControlRoom() {
         soundOn={ambientEnabled}
         onToggleSound={() => {
           void playClick();
-          setAmbientEnabled((v) => !v);
+          setAmbientEnabled((v) => {
+            const next = !v;
+            window.dispatchEvent(new CustomEvent("portfolio-night-audio", { detail: { enabled: next } }));
+            return next;
+          });
         }}
       />
 
@@ -385,12 +390,13 @@ export default function ControlRoom() {
       >
         <Canvas camera={{ position: [0, 3.4, 16], fov: 50, far: 2000 }} dpr={[0.7, 1]} gl={{ antialias: false, powerPreference: "high-performance" }}>
           <color attach="background" args={["#03060c"]} />
-          <fog attach="fog" args={["#03060c", 30, 110]} />
+          <fog attach="fog" args={["#03060c", 36, 150]} />
 
           <Suspense fallback={null}>
             <SpaceSky />
-            <InstancedStars count={760} radius={340} minSize={0.008} maxSize={0.04} opacityBase={0.36} opacityPulse={0.05} rotationSpeed={0.006} depthJitter={54} />
-            <InstancedStars count={360} radius={262} minSize={0.012} maxSize={0.048} opacityBase={0.28} opacityPulse={0.07} rotationSpeed={-0.011} depthJitter={26} />
+            <InstancedStars count={980} radius={356} minSize={0.008} maxSize={0.041} opacityBase={0.48} opacityPulse={0.06} rotationSpeed={0.0068} depthJitter={58} />
+            <InstancedStars count={520} radius={274} minSize={0.012} maxSize={0.053} opacityBase={0.4} opacityPulse={0.08} rotationSpeed={-0.012} depthJitter={34} />
+            <InstancedStars count={180} radius={218} minSize={0.016} maxSize={0.065} opacityBase={0.28} opacityPulse={0.1} rotationSpeed={0.015} depthJitter={18} />
             <GlassDome />
             <Floor />
           </Suspense>

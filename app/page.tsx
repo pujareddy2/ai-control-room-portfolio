@@ -6,6 +6,7 @@ import SkillsCarousel from "../components/portfolio/SkillsCarousel";
 import Projects from "../components/portfolio/Projects";
 import Certifications from "../components/portfolio/Certifications";
 import Contact from "../components/portfolio/Contact";
+import PortfolioSoundscape from "../components/ui/PortfolioSoundscape";
 
 function Footer() {
   return (
@@ -28,6 +29,7 @@ function Footer() {
 export default function Home() {
   return (
     <main className="relative w-full overflow-x-hidden text-white">
+      <PortfolioSoundscape />
       <Starfield />
 
       <div className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(circle_at_20%_8%,rgba(96,165,250,0.13),transparent_42%),radial-gradient(circle_at_85%_18%,rgba(56,189,248,0.1),transparent_38%),linear-gradient(to_bottom,rgba(2,6,23,0.5),rgba(0,0,0,0.82))]" />

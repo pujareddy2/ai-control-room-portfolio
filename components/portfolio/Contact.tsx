@@ -46,16 +46,12 @@ export default function Contact() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <div className="mb-4 flex justify-center gap-2 font-mono text-sm text-amber-200/85">
+          <div className="mb-4 flex justify-center gap-2 font-mono text-lg font-bold tracking-[0.08em] text-amber-100/95 md:text-xl">
             <span>📨</span>
-            <span>COMMUNICATION</span>
+            <span>CONTACT ME</span>
           </div>
-          <h2 className="font-heading text-5xl font-bold tracking-tight md:text-6xl">
-            <span className="text-white">Let&apos;s </span>
-            <span className="text-amber-200">Connect</span>
-          </h2>
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto">
-            Have a project in mind or just want to say hi? I&apos;m always open to discussing new opportunities and creative ideas.
+          <p className="mt-5 mx-auto max-w-2xl text-base font-semibold text-gray-300 md:text-lg">
+            Open to opportunities and collaborations in Applied Ai.
           </p>
         </motion.div>
 
