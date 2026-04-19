@@ -176,7 +176,7 @@ export const PROJECTS: PortfolioProject[] = [
   {
     title: "Canoply",
     subtitle: "Modern SaaS Product Landing Experience",
-    image: "/projects/stay-booking.svg",
+    image: "/projects/producthub.svg",
     summary:
       "Modern product landing and conversion-oriented web experience with clean section architecture.",
     paragraphs: [
@@ -261,7 +261,7 @@ export const PROJECTS: PortfolioProject[] = [
   {
     title: "Airbnb Price Prediction",
     subtitle: "Regression ML Model",
-    image: "/projects/airbnb-price-prediction.svg",
+    image: "/projects/visual-pattern-classification.svg",
     summary:
       "Scikit-learn regression pipeline for estimating listing price from market and listing features.",
     paragraphs: [

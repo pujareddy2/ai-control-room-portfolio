@@ -46,10 +46,11 @@ export default function TopBar({ soundOn, onToggleSound }: Props) {
           <button
             type="button"
             onClick={onToggleSound}
-            className="rounded-md p-1.5 text-white/75 transition hover:bg-white/10"
+            className="inline-flex items-center gap-1.5 rounded-md p-1.5 text-white/75 transition hover:bg-white/10"
             aria-label={soundOn ? "Mute sound" : "Enable sound"}
           >
             {soundOn ? <SpeakerOn className="h-4 w-4" /> : <SpeakerOff className="h-4 w-4" />}
+            <span className="text-[11px] font-mono uppercase tracking-[0.08em]">Audio</span>
           </button>
         </div>
       </div>

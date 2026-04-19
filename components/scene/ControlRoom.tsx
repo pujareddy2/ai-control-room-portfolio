@@ -25,7 +25,7 @@ export default function ControlRoom() {
   const detectedMobile = useIsMobile(760);
   const [force3DRoom, setForce3DRoom] = useState(false);
   const isMobile = detectedMobile && !force3DRoom;
-  const { enabled: ambientEnabled, setEnabled: setAmbientEnabled } = useAmbientAudio("/audio/night-sky-soft.mp3", 0.24);
+  const { enabled: ambientEnabled, setEnabled: setAmbientEnabled } = useAmbientAudio(undefined, 0.24);
   const { playClick, playOpen, playClose, playBoot, playAssistant, playHover, playModuleHit, playModuleTheme, playLockSwell } = useGameSfx();
 
   const [activeModule, setActiveModule] = useState<ModuleId | null>(null);
@@ -54,6 +54,7 @@ export default function ControlRoom() {
   });
   const dragVelocityRef = useRef(0);
   const dragInertiaRafRef = useRef<number | null>(null);
+  const bootPlayedRef = useRef(false);
 
   const moduleOrbits = useMemo(() => {
     const radius = 10.8;
@@ -149,7 +150,7 @@ export default function ControlRoom() {
 
   const onSelectModule = useCallback((id: ModuleId) => {
     if (!canSelectModule) {
-      void playClick();
+      if (ambientEnabled) void playClick();
       return;
     }
 
@@ -159,9 +160,11 @@ export default function ControlRoom() {
       const targetOffset = frontAngle - targetModule.orbitAngle;
       animateOrbitTo(targetOffset, 760);
     }
-    void playModuleHit();
-    void playModuleTheme(id);
-    void playLockSwell();
+    if (ambientEnabled) {
+      void playModuleHit();
+      void playModuleTheme(id);
+      void playLockSwell();
+    }
     triggerScreenPunch();
 
     window.setTimeout(() => {
@@ -169,7 +172,7 @@ export default function ControlRoom() {
       target?.scrollIntoView({ behavior: "smooth", block: "start" });
       setActiveModule(null);
     }, 220);
-  }, [animateOrbitTo, canSelectModule, moduleOrbits, playClick, playLockSwell, playModuleHit, playModuleTheme, triggerScreenPunch]);
+  }, [ambientEnabled, animateOrbitTo, canSelectModule, moduleOrbits, playClick, playLockSwell, playModuleHit, playModuleTheme, triggerScreenPunch]);
 
   useEffect(() => {
     if (zoomIntent == null) return;
@@ -178,30 +181,10 @@ export default function ControlRoom() {
   }, [zoomIntent]);
 
   useEffect(() => {
+    if (!ambientEnabled || bootPlayedRef.current) return;
+    bootPlayedRef.current = true;
     void playBoot();
-  }, [playBoot]);
-
-  useEffect(() => {
-    if (ambientEnabled) return;
-
-    const armAmbient = () => {
-      setAmbientEnabled(true);
-      window.dispatchEvent(new CustomEvent("portfolio-night-audio", { detail: { enabled: true } }));
-      window.removeEventListener("pointerdown", armAmbient);
-      window.removeEventListener("keydown", armAmbient);
-      window.removeEventListener("wheel", armAmbient);
-    };
-
-    window.addEventListener("pointerdown", armAmbient, { once: true });
-    window.addEventListener("keydown", armAmbient, { once: true });
-    window.addEventListener("wheel", armAmbient, { once: true });
-
-    return () => {
-      window.removeEventListener("pointerdown", armAmbient);
-      window.removeEventListener("keydown", armAmbient);
-      window.removeEventListener("wheel", armAmbient);
-    };
-  }, [ambientEnabled, setAmbientEnabled]);
+  }, [ambientEnabled, playBoot]);
 
   const pulseStrength = useCallback(
     (id: ModuleId) => {
@@ -257,7 +240,7 @@ export default function ControlRoom() {
         <MobileMode
           onOpen3DRoom={() => setForce3DRoom(true)}
           onOpen={(id) => {
-            void playOpen();
+            if (ambientEnabled) void playOpen();
             setActiveModule(id);
           }}
         />
@@ -266,7 +249,7 @@ export default function ControlRoom() {
           title={activeModule ? activeModule.toUpperCase() : ""}
           subtitle="MODULE DETAILS"
           onClose={() => {
-            void playClose();
+            if (ambientEnabled) void playClose();
             setActiveModule(null);
           }}
         >
@@ -321,6 +304,17 @@ export default function ControlRoom() {
         }
       }}
     >
+      <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="control-room-space-gradient absolute inset-0" />
+        <div className="control-room-stars control-room-stars-back absolute inset-0" />
+        <div className="control-room-stars control-room-stars-mid absolute inset-0" />
+        <div className="control-room-stars control-room-stars-front absolute inset-0" />
+        <div className="shooting-star-layer">
+          <div className="shooting-star shooting-star-1" />
+          <div className="shooting-star shooting-star-2" />
+        </div>
+      </div>
+
       <div className="pointer-events-none absolute inset-0 z-5">
         <div className="hud-grid-bg absolute inset-0 opacity-35" />
         <div className="scanline-overlay absolute inset-0" />
@@ -341,12 +335,12 @@ export default function ControlRoom() {
       <TopBar
         soundOn={ambientEnabled}
         onToggleSound={() => {
-          void playClick();
-          setAmbientEnabled((v) => {
-            const next = !v;
-            window.dispatchEvent(new CustomEvent("portfolio-night-audio", { detail: { enabled: next } }));
-            return next;
-          });
+          const next = !ambientEnabled;
+          if (next) {
+            void playClick();
+          }
+          window.dispatchEvent(new CustomEvent("portfolio-night-audio", { detail: { enabled: next } }));
+          setAmbientEnabled(next);
         }}
       />
 
@@ -383,20 +377,19 @@ export default function ControlRoom() {
       </div>
 
       <motion.div
-        className="absolute inset-0"
+        className="absolute inset-0 z-[1]"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, scale: 1 + screenPunch * 0.008, rotateX: screenPunch * 0.18, rotateZ: screenPunch * 0.06 }}
         transition={{ duration: 0.25, ease: "easeOut" }}
       >
         <Canvas camera={{ position: [0, 3.4, 16], fov: 50, far: 2000 }} dpr={[0.7, 1]} gl={{ antialias: false, powerPreference: "high-performance" }}>
           <color attach="background" args={["#03060c"]} />
-          <fog attach="fog" args={["#03060c", 36, 150]} />
+          <fog attach="fog" args={["#03060c", 30, 110]} />
 
           <Suspense fallback={null}>
             <SpaceSky />
-            <InstancedStars count={980} radius={356} minSize={0.008} maxSize={0.041} opacityBase={0.48} opacityPulse={0.06} rotationSpeed={0.0068} depthJitter={58} />
-            <InstancedStars count={520} radius={274} minSize={0.012} maxSize={0.053} opacityBase={0.4} opacityPulse={0.08} rotationSpeed={-0.012} depthJitter={34} />
-            <InstancedStars count={180} radius={218} minSize={0.016} maxSize={0.065} opacityBase={0.28} opacityPulse={0.1} rotationSpeed={0.015} depthJitter={18} />
+            <InstancedStars count={760} radius={340} minSize={0.008} maxSize={0.04} opacityBase={0.36} opacityPulse={0.05} rotationSpeed={0.006} depthJitter={54} />
+            <InstancedStars count={360} radius={262} minSize={0.012} maxSize={0.048} opacityBase={0.28} opacityPulse={0.07} rotationSpeed={-0.011} depthJitter={26} />
             <GlassDome />
             <Floor />
           </Suspense>
@@ -428,7 +421,7 @@ export default function ControlRoom() {
               canSelect={canSelectModule}
               onSelect={onSelectModule}
               onHoverChange={(id) => {
-                if (id && id !== hoverModule) {
+                if (ambientEnabled && id && id !== hoverModule) {
                   void playHover();
                 }
                 setHoverModule(id);
@@ -439,7 +432,7 @@ export default function ControlRoom() {
           <Suspense fallback={null}>
             <RobotAssistant
               onActivate={() => {
-                void playAssistant();
+                if (ambientEnabled) void playAssistant();
                 onSelectModule("about");
               }}
             />
@@ -505,7 +498,7 @@ export default function ControlRoom() {
         title={activeModule ? activeModule.toUpperCase() : ""}
         subtitle="MODULE DETAILS"
         onClose={() => {
-          void playClose();
+          if (ambientEnabled) void playClose();
           setActiveModule(null);
         }}
       >

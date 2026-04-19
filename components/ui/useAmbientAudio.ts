@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-export default function useAmbientAudio(src = "/audio/ambient.mp3", volume = 0.2) {
+export default function useAmbientAudio(src?: string, volume = 0.2) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const ctxRef = useRef<AudioContext | null>(null);
   const synthCleanupRef = useRef<(() => void) | null>(null);
@@ -145,6 +145,13 @@ export default function useAmbientAudio(src = "/audio/ambient.mp3", volume = 0.2
     if (!enabled) {
       stopAll();
       return;
+    }
+
+    if (!src) {
+      void startSynthAmbient();
+      return () => {
+        stopAll();
+      };
     }
 
     const audio = new Audio(src);

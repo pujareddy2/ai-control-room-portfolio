@@ -22,9 +22,11 @@ export default function CameraRig({ target = [0, -1.5, 0], focusLevel = 0, punch
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
+      if (!e.key) return;
       keysRef.current[e.key.toLowerCase()] = true;
     };
     const up = (e: KeyboardEvent) => {
+      if (!e.key) return;
       keysRef.current[e.key.toLowerCase()] = false;
     };
     window.addEventListener("keydown", down);

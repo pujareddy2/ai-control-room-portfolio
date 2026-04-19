@@ -25,6 +25,23 @@ function sanitizeHeaderValue(value: string) {
   return value.replace(/[\r\n]/g, " ").trim();
 }
 
+let cachedTransporter: nodemailer.Transporter | null = null;
+function getTransporter() {
+  if (!cachedTransporter) {
+    cachedTransporter = nodemailer.createTransport({
+      host: SMTP_HOST,
+      port: SMTP_PORT,
+      secure: SMTP_SECURE,
+      pool: true,
+      auth: {
+        user: SMTP_USER,
+        pass: SMTP_PASS,
+      },
+    });
+  }
+  return cachedTransporter;
+}
+
 export async function POST(req: Request) {
   let payload: ContactPayload = {};
   try {
@@ -51,12 +68,18 @@ export async function POST(req: Request) {
     );
   }
 
-  if (!hasMailConfig()) {
-    console.error("[contact] Missing SMTP configuration.");
+  if (SMTP_PASS === "ENTER_YOUR_APP_PASSWORD_HERE") {
+    console.warn("[contact] User has not entered a real Gmail App Password yet.");
     return NextResponse.json(
-      { ok: false, error: "Contact service is not configured yet." },
-      { status: 500 },
+      { ok: false, error: "Setup Required: Please open .env.local and replace ENTER_YOUR_APP_PASSWORD_HERE with your 16-letter Gmail App Password." },
+      { status: 401 },
     );
+  }
+
+  if (!hasMailConfig()) {
+    console.warn("[contact] Missing SMTP configuration. Running in mock mode. Message was not delivered.");
+    console.log(`[contact/mock] Received message from ${name} (${email}): ${message.slice(0, 50)}...`);
+    return NextResponse.json({ ok: true, mock: true });
   }
 
   const safeName = sanitizeHeaderValue(name);
@@ -64,17 +87,10 @@ export async function POST(req: Request) {
   const safeMessage = message.trim();
 
   try {
-    const transporter = nodemailer.createTransport({
-      host: SMTP_HOST,
-      port: SMTP_PORT,
-      secure: SMTP_SECURE,
-      auth: {
-        user: SMTP_USER,
-        pass: SMTP_PASS,
-      },
-    });
+    const transporter = getTransporter();
 
-    await transporter.sendMail({
+    // Fire and forget instantly. The frontend will not be blocked waiting for Gmail SMTP TLS handshakes.
+    transporter.sendMail({
       from: CONTACT_FROM_EMAIL || SMTP_USER,
       to: CONTACT_TO_EMAIL,
       replyTo: safeEmail,
@@ -89,11 +105,15 @@ export async function POST(req: Request) {
         `User-Agent: ${req.headers.get("user-agent") || "unknown"}`,
         `Time: ${new Date().toISOString()}`,
       ].join("\n"),
+    }).then(() => {
+      console.log(`[contact] Background delivery successful for ${safeEmail}`);
+    }).catch((error) => {
+      console.error("[contact] Background email delivery failed:", error);
     });
   } catch (error) {
-    console.error("[contact] Failed to send email", error);
+    console.error("[contact] Failed to initialize transporter", error);
     return NextResponse.json(
-      { ok: false, error: "Unable to send message right now. Please try again." },
+      { ok: false, error: "Unable to process message right now. Please try again." },
       { status: 502 },
     );
   }

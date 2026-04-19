@@ -4,12 +4,17 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { GitHub, LinkedIn } from "../ui/icons";
 
+type FormState = "idle" | "sending" | "success" | "error";
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
+  const [status, setStatus] = useState<FormState>("idle");
+  const [statusMessage, setStatusMessage] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -20,19 +25,36 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Contact form will submit to API route
+    setStatus("sending");
+    setStatusMessage("");
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.subject
+            ? `Subject: ${formData.subject}\n\n${formData.message}`
+            : formData.message,
+        }),
       });
+
+      const data = (await response.json().catch(() => null)) as { ok?: boolean; error?: string } | null;
+
       if (response.ok) {
-        setFormData({ name: "", email: "", message: "" });
-        alert("Message sent! I'll get back to you soon.");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setStatus("success");
+        setStatusMessage("Message sent successfully. I’ll get back to you soon.");
+      } else {
+        setStatus("error");
+        setStatusMessage(data?.error ?? "Failed to send message. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
+      setStatus("error");
+      setStatusMessage("Failed to send message. Please try again.");
     }
   };
 
@@ -46,7 +68,10 @@ export default function Contact() {
           viewport={{ once: true }}
           className="mb-16 text-center"
         >
-          <div className="mb-4 flex justify-center gap-2 font-mono text-lg font-bold tracking-[0.08em] text-amber-100/95 md:text-xl">
+          <h2 className="font-heading text-2xl font-semibold tracking-tight text-white md:text-3xl">
+            Feel free to reach out for collaborations or opportunities
+          </h2>
+          <div className="mt-4 mb-4 flex justify-center gap-2 font-mono text-lg font-bold tracking-[0.08em] text-amber-100/95 md:text-xl">
             <span>📨</span>
             <span>CONTACT ME</span>
           </div>
@@ -64,8 +89,7 @@ export default function Contact() {
             viewport={{ once: true }}
           >
             <div className="rounded-2xl border border-white/15 bg-slate-950/65 p-8 backdrop-blur">
-              <h3 className="text-2xl font-bold text-white mb-2">Send a Message</h3>
-              <p className="text-gray-400 text-sm mb-6">I&apos;ll get back to you within 24 hours.</p>
+              <h3 className="text-2xl font-bold text-white mb-6">Send a Message</h3>
 
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -95,6 +119,18 @@ export default function Contact() {
                 </div>
 
                 <div>
+                  <label className="mb-2 block text-sm font-mono text-amber-100/90">SUBJECT (OPTIONAL)</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Project discussion / Opportunity"
+                    className="w-full rounded-xl border border-white/15 bg-black/45 px-4 py-3 text-white placeholder-gray-500 transition focus:border-amber-200/50 focus:outline-none"
+                  />
+                </div>
+
+                <div>
                   <label className="mb-2 block text-sm font-mono text-amber-100/90">YOUR MESSAGE</label>
                   <textarea
                     name="message"
@@ -109,11 +145,18 @@ export default function Contact() {
 
                 <button
                   type="submit"
+                  disabled={status === "sending"}
                   className="flex w-full items-center justify-center gap-2 rounded-xl border border-amber-200/45 bg-amber-100/10 py-3 font-mono text-amber-100 transition hover:bg-amber-100/18"
                 >
-                  <span>SEND MESSAGE</span>
+                  <span>{status === "sending" ? "SENDING..." : "SEND MESSAGE"}</span>
                   <span>→</span>
                 </button>
+
+                {statusMessage ? (
+                  <p className={`text-sm ${status === "success" ? "text-emerald-300" : "text-rose-300"}`}>
+                    {statusMessage}
+                  </p>
+                ) : null}
               </form>
             </div>
           </motion.div>

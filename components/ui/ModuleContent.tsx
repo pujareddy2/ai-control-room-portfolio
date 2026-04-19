@@ -41,20 +41,20 @@ function ProjectVisual({ title, image }: { title: string; image?: string }) {
   }, [title]);
 
   return (
-    <div className={`relative h-40 rounded-xl border border-white/10 bg-linear-to-br ${palette}`}>
+    <div className={`relative aspect-video rounded-xl border border-white/10 bg-linear-to-br ${palette} overflow-hidden`}>
       {image ? (
         <Image
           src={image}
           alt={`${title} project visual`}
           fill
           sizes="(max-width: 768px) 100vw, 420px"
-          className="absolute inset-0 rounded-xl object-cover"
+          className="absolute inset-0 object-cover object-top"
           loading="lazy"
         />
       ) : null}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(56,189,248,0.25),transparent_55%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(96,165,250,0.2),transparent_45%)]" />
-      <div className="absolute bottom-3 left-3 right-3 rounded-lg border border-white/10 bg-black/35 px-3 py-2 text-xs text-white/80 backdrop-blur-sm">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(56,189,248,0.25),transparent_55%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(96,165,250,0.2),transparent_45%)] pointer-events-none" />
+      <div className="absolute bottom-3 left-3 right-3 rounded-lg border border-white/10 bg-black/35 px-3 py-2 text-xs text-white/80 backdrop-blur-sm pointer-events-none">
         {title}
       </div>
     </div>

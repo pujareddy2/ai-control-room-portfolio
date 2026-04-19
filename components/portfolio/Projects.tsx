@@ -41,25 +41,26 @@ export default function Projects() {
               >
                 <div className="grid gap-4 lg:grid-cols-10 lg:gap-5">
                   <div
-                    className={`relative min-h-[280px] overflow-hidden rounded-xl bg-black/35 lg:min-h-[360px] ${imageSpan} ${
+                    className={`relative w-full overflow-hidden rounded-xl bg-black/35 ${imageSpan} ${
                       isReverse ? "lg:order-2" : "lg:order-1"
                     }`}
                   >
                     <button
                       type="button"
                       onClick={() => setSelectedIndex(idx)}
-                      className="relative h-full w-full p-3"
+                      className="relative block w-full group"
                       aria-label={`Open details for ${project.title}`}
                     >
-                      <div className="relative h-full w-full rounded-lg border border-white/15 bg-slate-900/55">
+                      <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/15 bg-slate-900/55">
                         <Image
                           src={imageSrc}
                           alt={project.title}
                           fill
                           priority={idx < 2}
                           sizes="(max-width: 1024px) 100vw, 50vw"
-                          className="object-contain p-2 transition duration-500 group-hover:scale-[1.01]"
+                          className="object-cover object-top transition duration-500 group-hover:scale-105"
                         />
+                        <div className="absolute inset-0 bg-black/10 transition-opacity duration-300 group-hover:opacity-0" />
                       </div>
                     </button>
                   </div>
@@ -75,12 +76,8 @@ export default function Projects() {
 
                     <div className="my-5 h-px w-full bg-gradient-to-r from-white/20 via-white/10 to-transparent" />
 
-                    <p className="text-[1.03rem] leading-relaxed text-gray-200">
+                    <p className="text-[1rem] leading-relaxed text-gray-200">
                       {project.summary}
-                    </p>
-
-                    <p className="mt-4 text-sm leading-relaxed text-gray-400/90">
-                      {project.paragraphs[0]}
                     </p>
 
                     <div className="my-5 h-px w-full bg-gradient-to-r from-white/16 via-white/8 to-transparent" />
@@ -151,32 +148,65 @@ export default function Projects() {
               onClick={(event) => event.stopPropagation()}
               className="max-h-[88vh] w-full max-w-5xl overflow-auto rounded-2xl border border-white/15 bg-gradient-to-b from-gray-950 to-black p-5 shadow-[0_30px_100px_rgba(0,0,0,0.75)] md:p-8"
             >
-              <div className="grid gap-6 lg:grid-cols-2">
-                <div className="relative min-h-[280px] overflow-hidden rounded-xl border border-white/10 bg-slate-900/55 p-3">
-                  <div className="relative h-full w-full rounded-lg border border-white/10 bg-black/35">
-                    <Image
-                      src={selectedProject.image ?? "/projects/producthub.svg"}
-                      alt={selectedProject.title}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-contain p-2"
-                    />
-                  </div>
+              <div className="flex flex-col gap-6">
+                <div className="relative aspect-video w-full overflow-hidden rounded-xl border border-white/10 bg-slate-900/55">
+                  <Image
+                    src={selectedProject.image ?? "/projects/producthub.svg"}
+                    alt={selectedProject.title}
+                    fill
+                    sizes="100vw"
+                    className="object-cover object-top"
+                  />
                 </div>
 
                 <div>
                   <h3 className="font-heading text-3xl text-white">{selectedProject.title}</h3>
                   <p className="mt-2 font-mono text-xs tracking-[0.18em] text-cyan-100/80">{selectedProject.subtitle}</p>
-                  <p className="mt-4 text-sm leading-relaxed text-gray-300">{selectedProject.summary}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-400">{selectedProject.paragraphs[0]}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-gray-400">{selectedProject.paragraphs[1]}</p>
 
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {selectedProject.stack.map((item) => (
-                      <span key={item} className="rounded-md border border-white/20 bg-white/5 px-2.5 py-1 text-xs font-mono text-gray-200">
-                        {item}
-                      </span>
-                    ))}
+                  <div className="mt-4 space-y-4 text-sm leading-relaxed text-gray-300">
+                    <div>
+                      <h4 className="font-mono text-xs tracking-[0.14em] text-cyan-100/80">PROJECT OVERVIEW</h4>
+                      <p className="mt-1">{selectedProject.summary}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-mono text-xs tracking-[0.14em] text-cyan-100/80">PROBLEM CONTEXT</h4>
+                      <p className="mt-1">{selectedProject.paragraphs[0]}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-mono text-xs tracking-[0.14em] text-cyan-100/80">APPROACH / METHODOLOGY</h4>
+                      <p className="mt-1">{selectedProject.paragraphs[1]}</p>
+                    </div>
+                    <div>
+                      <h4 className="font-mono text-xs tracking-[0.14em] text-cyan-100/80">KEY FEATURES</h4>
+                      <ul className="mt-2 space-y-1.5">
+                        {selectedProject.highlights.slice(0, 4).map((highlight) => (
+                          <li key={highlight} className="flex items-start gap-2">
+                            <span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-cyan-200" />
+                            <span>{highlight}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-mono text-xs tracking-[0.14em] text-cyan-100/80">TECHNICAL IMPLEMENTATION</h4>
+                      <p className="mt-1">The solution integrates modular APIs, data handling pipelines, and model-assisted logic with production-oriented frontend and backend orchestration.</p>
+                    </div>
+                    <div>
+                      <h4 className="font-mono text-xs tracking-[0.14em] text-cyan-100/80">CHALLENGES & SOLUTIONS</h4>
+                      <ul className="mt-2 space-y-1.5">
+                        <li className="flex items-start gap-2"><span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-cyan-200" /><span>Handled data inconsistency with structured preprocessing and validation layers.</span></li>
+                        <li className="flex items-start gap-2"><span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-cyan-200" /><span>Improved response quality through iterative prompt/model and pipeline tuning.</span></li>
+                        <li className="flex items-start gap-2"><span className="mt-1 inline-block h-1.5 w-1.5 rounded-full bg-cyan-200" /><span>Reduced integration friction by standardizing API contracts and reusable modules.</span></li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h4 className="font-mono text-xs tracking-[0.14em] text-cyan-100/80">OUTCOME / RESULT</h4>
+                      <p className="mt-1">Delivered a reliable, user-friendly system with clear technical depth and real-world applicability.</p>
+                    </div>
+                    <div>
+                      <h4 className="font-mono text-xs tracking-[0.14em] text-cyan-100/80">TECH STACK</h4>
+                      <p className="mt-1">Tech: {selectedProject.stack.join(", ")}</p>
+                    </div>
                   </div>
 
                   {(selectedProject.links.live || selectedProject.links.github) ? (
@@ -207,25 +237,6 @@ export default function Projects() {
                   ) : null}
                 </div>
               </div>
-
-              <div className="mt-8 rounded-xl border border-white/10 bg-white/[0.03] p-4">
-                <div className="font-mono text-xs tracking-[0.16em] text-cyan-100/75">DETAIL HIGHLIGHTS</div>
-                <ul className="mt-3 space-y-2 text-sm text-gray-300">
-                  {selectedProject.highlights.map((highlight) => (
-                    <li key={highlight} className="flex items-start gap-2">
-                      <span className="mt-1.5 inline-block h-1.5 w-1.5 rounded-full bg-cyan-200" />
-                      <span>{highlight}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {selectedProject.contribution ? (
-                <div className="mt-4 rounded-xl border border-white/10 bg-white/[0.02] p-4 text-sm text-gray-300">
-                  <span className="font-mono text-xs tracking-[0.16em] text-cyan-100/75">MY CONTRIBUTION</span>
-                  <p className="mt-2 leading-relaxed">{selectedProject.contribution}</p>
-                </div>
-              ) : null}
 
               <div className="mt-6 flex justify-end">
                 <button
